@@ -647,7 +647,7 @@ struct nvram_pair router_defaults[] = {
 	{ "wins_enable", "0" },
 	{ "lltd_enable", "1" },
 	{ "adsc_enable", "0" },
-	{ "crond_enable", "1" },
+	{ "crond_enable", "0" },
 	{ "crond_log", "0" },
 
 #if defined(BOARD_N65U)
@@ -670,7 +670,7 @@ struct nvram_pair router_defaults[] = {
 	{ "fn2_action_short", "0" },
 	{ "fn2_action_long", "0" },
 #endif
-	{ "watchdog_cpu", "1" },
+	{ "watchdog_cpu", "0" },
 	{ "front_led_all", "1" },
 	{ "front_led_wan", "2" },
 	{ "front_led_lan", "2" },
