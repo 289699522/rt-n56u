@@ -75,6 +75,7 @@ struct nvram_pair router_defaults[] = {
 	{ "wan_hostname", "" },			/* WAN hostname */
 	{ "wan_vci", "" },			/* WAN vendor class identifier (OPT-60) */
 	{ "wan_ttl_fix", "0" },
+	{ "wan_ttl_value", "0" },
 	{ "wan_hwaddr_x", "" },
 	{ "wan_nat_x", "1" },
 	{ "wan_mtu", "1500" },
@@ -219,11 +220,21 @@ struct nvram_pair router_defaults[] = {
 	{ "wl_greenap", "0" },
 	{ "wl_ldpc", "2" },
 	{ "wl_HT_RDG", "0" },
+#if defined (USE_WID_5G) && USE_WID_5G==7615
+#if defined (BOARD_MT7615_DBDC)
 	{ "wl_HT_AMSDU", "0" },
+#else
+	{ "wl_HT_AMSDU", "1" },
+#endif
+#else
+	{ "wl_HT_AMSDU", "0" },
+#endif
 	{ "wl_HT_MpduDensity", "5" },
 	{ "wl_HT_BAWinSize", "64" },
 	{ "wl_HT_AutoBA", "1" },
 	{ "wl_VgaClamp", "0" },
+	{ "wl_KickStaRssiLow", "0" },
+	{ "wl_AssocReqRssiThres", "0" },
 
 	// guest AP 5Ghz
 	{ "wl_guest_enable", "0" },
@@ -242,8 +253,7 @@ struct nvram_pair router_defaults[] = {
 	{ "wl_guest_mcs_mode", "0" },
 
 #if defined (USE_WID_5G) && USE_WID_5G==7615
-	{ "wl_band_steering", "0" },
-	{ "wl_mumimo", "1" },
+	{ "wl_mumimo", "0" },
 #endif
 
 	// ApCli 5Ghz
@@ -320,6 +330,8 @@ struct nvram_pair router_defaults[] = {
 	{ "rt_HT_BAWinSize", "64" },
 	{ "rt_HT_AutoBA", "1" },
 	{ "rt_VgaClamp", "0" },
+	{ "rt_KickStaRssiLow", "0" },
+	{ "rt_AssocReqRssiThres", "0" },
 
 	// guest AP 2.4Ghz
 	{ "rt_guest_enable", "0" },
@@ -483,11 +495,35 @@ struct nvram_pair router_defaults[] = {
 	{ "scutclient_debug", "0" },
 	{ "scutclient_hostname", "Lenovo-PC" },
 	{ "scutclient_server_auth_ip", "202.38.210.131" },
+	{ "scutclient_skip_udp_hb", "0" },
 	{ "scutclient_version", "4472434f4d0096022a" },
 	{ "scutclient_hash", "2ec15ad258aee9604b18f2f8114da38db16efd00" },
 	{ "scutclient_username", "" },
 	{ "scutclient_password", "" },
 	{ "scutclient_watchcat", "1" },
+	{ "scutclient_wdg_force", "1" },
+
+	/* mentohust related */
+	{ "mentohust_enable", "0" },
+	{ "mentohust_username", "" },
+	{ "mentohust_password", "" },
+	{ "mentohust_nic", "" },
+	{ "mentohust_ip", "" },
+	{ "mentohust_mask", "" },
+	{ "mentohust_gw", "" },
+	{ "mentohust_dns", "" },
+	{ "mentohust_pinghost", "" },
+	{ "mentohust_timeout", "8" },
+	{ "mentohust_interval", "30" },
+	{ "mentohust_restart_wait", "15" },
+	{ "mentohust_maxfail", "0" },
+	{ "mentohust_startmode", "1" },
+	{ "mentohust_dhcp", "0" },
+	{ "mentohust_daemon", "1" },
+	{ "mentohust_service", "0" },
+	{ "mentohust_ver", "0.00" },
+	{ "mentohust_datafile", "/etc/storage/mentohust/" },
+	{ "mentohust_dhcpscript", "" },
 
 	/* ttyd related */
 	{ "ttyd_enable", "0" },
@@ -532,7 +568,7 @@ struct nvram_pair router_defaults[] = {
 	{ "ss_watchcat", "1" },
 	{ "ss_update_chnroute", "0" },
 	{ "ss_update_gfwlist", "0" },
-	
+
 	/* DHCP server parameters */
 	{ "dhcp_start", DEF_LAN_DHCP_BEG },	/* First assignable DHCP address */
 	{ "dhcp_end", DEF_LAN_DHCP_END },	/* Last assignable DHCP address */
@@ -794,6 +830,17 @@ struct nvram_pair router_defaults[] = {
 	{ "vpnc_ov_ciph", "3" },
 	{ "vpnc_ov_clzo", "2" },
 	{ "vpnc_ov_atls", "0" },
+
+	/* xTun */
+	{ "xTun_iface", "tun0" },
+	{ "xTun_cidr", "10.0.1.2/24" },
+	{ "xTun_server", "server.me" },
+	{ "xTun_port", "1082" },
+	{ "xTun_tcp", "0" },
+	{ "xTun_key", "password" },
+
+	{ "xTun_dns", "1.1.1.1" },
+	{ "xTun_black_list", "/etc/storage/xTun_black_list" },
 
 	{ 0, 0 }
 };
